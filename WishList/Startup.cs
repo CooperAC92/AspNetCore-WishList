@@ -22,10 +22,18 @@ namespace WishList
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            } else
+            }
+
+            if (env.IsStaging())
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+
+            if (env.IsProduction())
             {
                 app.UseExceptionHandler("/Home/Error");
             }
